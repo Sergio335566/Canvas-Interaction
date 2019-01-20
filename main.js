@@ -9,7 +9,15 @@ var mouse = {
   y: undefined
 }
 var maxSize = 40;
+var minSize = 2;
 
+var colorArray = [
+  '#031926',
+  '#56445D',
+  '#77ACA2',
+  '#9DBEBB',
+  '#F4E9CD',
+]
 window.addEventListener('mousemove', function(event){
   mouse.x = event.x;
   mouse.y = event.y;
@@ -22,14 +30,16 @@ function Rect(x, y, dx, dy, size){
   this.dx = dx;
   this.dy = dy;
   this.size = size;
+  this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
   this.draw = function(){
     c.beginPath();
     c.fillRect(this.x, this.y, this.size, this.size);
     c.strokeStyle = 'red';
     c.stroke();
-    c.fillStyle = 'blue';
+    c.fillStyle = this.color;
   }
+
   this.update = function() {
     if (this.x + size > innerWidth || this.x - this.size < 0) {
       this.dx = -this.dx;
@@ -44,7 +54,7 @@ function Rect(x, y, dx, dy, size){
       if (this.size < maxSize) {
       this.size += 1;
       }
-    } else if (this.size > 2) {
+    } else if (this.size > minSize) {
       this.size -= 0.2;
     }
 
@@ -56,8 +66,8 @@ function Rect(x, y, dx, dy, size){
 
 var rectangleArray = [];
 
-for (var i = 0; i < 50; i++) {
-  var size = 50;
+for (var i = 0; i < 500; i++) {
+  var size = Math.random() * 3 + 1;
   var x = Math.random() * (innerWidth - size * 2) + size;
   var y = Math.random() * (innerHeight - size * 2) + size;
   var dx = (Math.random() - 0.8) * 10;
