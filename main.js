@@ -31,22 +31,26 @@ function Rect(x, y, dx, dy, size){
   }
 }
 
-// var x = Math.random() * window.innerWidth;
-// var y = Math.random() * window.innerHeight;
-// var dx = (Math.random() - 0.8) * 10;
-// var dy = (Math.random() - 0.8) * 10;
-// var size = 50;
-
-var rectangle = new Rect(200, 200, 4, 4, 30);
 
 
+var rectangleArray = [];
+
+for (var i = 0; i < 50; i++) {
+  var x = Math.random() * window.innerWidth;
+  var y = Math.random() * window.innerHeight;
+  var dx = (Math.random() - 0.8) * 10;
+  var dy = (Math.random() - 0.8) * 10;
+  var size = 50;
+
+  rectangleArray.push(new Rect(x, y, dx, dy, size));
+  }
 
 function animate(){
   requestAnimationFrame(animate);
-  // for (var i = 0; i < 50; i++) {
     c.clearRect(0, 0, innerWidth, innerHeight);
-    rectangle.update();
+    for (var i = 0; i < rectangleArray.length; i++) {
+      rectangleArray[i].update();
 
-  // }
+    }
 }
 animate();
