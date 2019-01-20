@@ -4,7 +4,17 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var c = canvas.getContext('2d');
 
+var mouse = {
+  x: undefined,
+  y: undefined
+}
+var maxSize = 40;
 
+window.addEventListener('mousemove', function(event){
+  mouse.x = event.x;
+  mouse.y = event.y;
+  console.log(mouse);
+})
 
 function Rect(x, y, dx, dy, size){
   this.x = x;
@@ -12,11 +22,13 @@ function Rect(x, y, dx, dy, size){
   this.dx = dx;
   this.dy = dy;
   this.size = size;
+
   this.draw = function(){
     c.beginPath();
     c.fillRect(this.x, this.y, this.size, this.size);
     c.strokeStyle = 'red';
     c.stroke();
+    c.fillStyle = 'blue';
   }
   this.update = function() {
     if (this.x + size > innerWidth || this.x - this.size < 0) {
@@ -27,6 +39,15 @@ function Rect(x, y, dx, dy, size){
     }
     this.x += this.dx;
     this.y += this.dy;
+
+    if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+      if (this.size < maxSize) {
+      this.size += 1;
+      }
+    } else if (this.size > 2) {
+      this.size -= 0.2;
+    }
+
     this.draw();
   }
 }
