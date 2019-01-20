@@ -36,11 +36,12 @@ function Rect(x, y, dx, dy, size){
 var rectangleArray = [];
 
 for (var i = 0; i < 50; i++) {
-  var x = Math.random() * window.innerWidth;
-  var y = Math.random() * window.innerHeight;
+  var size = 50;
+  var x = Math.random() * (innerWidth - size * 2) + size;
+  var y = Math.random() * (innerHeight - size * 2) + size;
   var dx = (Math.random() - 0.8) * 10;
   var dy = (Math.random() - 0.8) * 10;
-  var size = 50;
+
 
   rectangleArray.push(new Rect(x, y, dx, dy, size));
   }
