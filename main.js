@@ -1,9 +1,9 @@
-var canvas = document.querySelector('canvas');
+var canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var c = canvas.getContext('2d');
 
+var c = canvas.getContext('2d');
 var mouse = {
   x: undefined,
   y: undefined
@@ -12,16 +12,14 @@ var maxSize = 70;
 // var minSize = 2;
 
 var colorArray = [
-  '#031926',
-  '#56445D',
-  '#77ACA2',
-  '#9DBEBB',
-  '#F4E9CD',
+  '#192BC2',
+  '#192BC2',
+  '#ffed4b',
+  '#ffed4b',
 ]
 window.addEventListener('mousemove', function(event){
   mouse.x = event.x;
   mouse.y = event.y;
-  console.log(mouse);
 })
 
 window.addEventListener('resize', function(){
@@ -36,11 +34,10 @@ function Rect(x, y, dx, dy, size){
   this.minSize = size;
   this.size = size;
   this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
-
   this.draw = function(){
+
     c.beginPath();
     c.fillRect(this.x, this.y, this.size, this.size);
-    c.strokeStyle = 'red';
     c.stroke();
     c.fillStyle = this.color;
   }
@@ -55,7 +52,7 @@ function Rect(x, y, dx, dy, size){
     this.x += this.dx;
     this.y += this.dy;
 
-    if (mouse.x - this.x < 30 && mouse.x - this.x > -30 && mouse.y - this.y < 30 && mouse.y - this.y > -30) {
+    if (mouse.x - this.x < 100 && mouse.x - this.x > -100 && mouse.y - this.y < 100 && mouse.y - this.y > -100) {
       if (this.size < maxSize) {
       this.size += 1;
       }
@@ -67,16 +64,14 @@ function Rect(x, y, dx, dy, size){
   }
 }
 
-
-
 var rectangleArray = [];
 
-for (var i = 0; i < 3000; i++) {
-  var size = Math.random() * 5 + 1;
-  var x = Math.random() * (innerWidth - size * 2) + size;
-  var y = Math.random() * (innerHeight - size * 2) + size;
-  var dx = (Math.random() - 0.8) * 10;
-  var dy = (Math.random() - 0.8) * 10;
+for (var i = 0; i < 500; i++) {
+  var size = Math.random() * 1 + 1;
+  var x = Math.random() * (innerWidth - size * 20) + size;
+  var y = Math.random() * (innerHeight - size * 20) + size;
+  var dx = (Math.random() - 1) * 10;
+  var dy = (Math.random() - 1) * 10;
 
 
   rectangleArray.push(new Rect(x, y, dx, dy, size));
@@ -91,3 +86,15 @@ function animate(){
     }
 }
 animate();
+
+$("body").mousemove(function(e){
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let mouseX = e.pageX - width/2;
+  let mouseY = e.pageY + height/2
+  let movingDelay = new TimelineMax();
+  movingDelay.add([
+    TweenMax.to("h1", 1, {x: 0.03*mouseX, y: 0.03*mouseY, ease: Power2.easeOut}),
+  ]);
+
+});

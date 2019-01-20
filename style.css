@@ -4,5 +4,19 @@ body{
 }
 
 #canvas{
-  background-color: wheat;
+
+  background: linear-gradient(190deg, #192BC2 55%, #ffed4b 55%);
+  color:white;
+
+}
+h1{
+  position: absolute;
+
+color: transparent;
+-webkit-text-stroke:1px black;
+  z-index: 99;
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+  margin:0 110px;
+  font-size: 500px;
 }
