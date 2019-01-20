@@ -8,8 +8,8 @@ var mouse = {
   x: undefined,
   y: undefined
 }
-var maxSize = 40;
-var minSize = 2;
+var maxSize = 70;
+// var minSize = 2;
 
 var colorArray = [
   '#031926',
@@ -29,6 +29,7 @@ function Rect(x, y, dx, dy, size){
   this.y = y;
   this.dx = dx;
   this.dy = dy;
+  this.minSize = size;
   this.size = size;
   this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
@@ -54,8 +55,8 @@ function Rect(x, y, dx, dy, size){
       if (this.size < maxSize) {
       this.size += 1;
       }
-    } else if (this.size > minSize) {
-      this.size -= 0.2;
+    } else if (this.size > this.minSize) {
+      this.size -= 1;
     }
 
     this.draw();
@@ -66,8 +67,8 @@ function Rect(x, y, dx, dy, size){
 
 var rectangleArray = [];
 
-for (var i = 0; i < 500; i++) {
-  var size = Math.random() * 3 + 1;
+for (var i = 0; i < 1000; i++) {
+  var size = Math.random() * 5 + 1;
   var x = Math.random() * (innerWidth - size * 2) + size;
   var y = Math.random() * (innerHeight - size * 2) + size;
   var dx = (Math.random() - 0.8) * 10;
