@@ -1,7 +1,7 @@
 var canvas = document.querySelector('canvas');
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 var c = canvas.getContext('2d');
 
 var mouse = {
@@ -24,6 +24,10 @@ window.addEventListener('mousemove', function(event){
   console.log(mouse);
 })
 
+window.addEventListener('resize', function(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+})
 function Rect(x, y, dx, dy, size){
   this.x = x;
   this.y = y;
@@ -51,7 +55,7 @@ function Rect(x, y, dx, dy, size){
     this.x += this.dx;
     this.y += this.dy;
 
-    if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+    if (mouse.x - this.x < 30 && mouse.x - this.x > -30 && mouse.y - this.y < 30 && mouse.y - this.y > -30) {
       if (this.size < maxSize) {
       this.size += 1;
       }
@@ -67,7 +71,7 @@ function Rect(x, y, dx, dy, size){
 
 var rectangleArray = [];
 
-for (var i = 0; i < 1000; i++) {
+for (var i = 0; i < 3000; i++) {
   var size = Math.random() * 5 + 1;
   var x = Math.random() * (innerWidth - size * 2) + size;
   var y = Math.random() * (innerHeight - size * 2) + size;
